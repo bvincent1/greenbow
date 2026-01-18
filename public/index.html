@@ -151,6 +151,107 @@
 				margin-bottom: 1rem;
 			}
 
+			.carousel-container {
+				position: relative;
+				width: 100%;
+				background: white;
+				border-radius: 12px;
+				overflow: hidden;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			.carousel {
+				position: relative;
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+
+			.carousel-wrapper {
+				display: flex;
+				transition: transform 0.5s ease-in-out;
+			}
+
+			.carousel-slide {
+				min-width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+				aspect-ratio: 4/3;
+				position: relative;
+			}
+
+			.carousel-slide img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.carousel-slide-placeholder {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+				color: white;
+				font-size: 1.5rem;
+			}
+
+			.carousel-controls {
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				gap: 10px;
+				z-index: 10;
+			}
+
+			.carousel-dot {
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				background-color: rgba(255, 255, 255, 0.5);
+				cursor: pointer;
+				transition: background-color 0.3s;
+				border: 2px solid white;
+			}
+
+			.carousel-dot.active {
+				background-color: white;
+			}
+
+			.carousel-button {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				background-color: rgba(46, 125, 50, 0.8);
+				color: white;
+				border: none;
+				padding: 12px 18px;
+				font-size: 1.5rem;
+				cursor: pointer;
+				border-radius: 4px;
+				transition: background-color 0.3s;
+				z-index: 10;
+			}
+
+			.carousel-button:hover {
+				background-color: rgba(27, 94, 32, 0.9);
+			}
+
+			.carousel-button.prev {
+				left: 10px;
+			}
+
+			.carousel-button.next {
+				right: 10px;
+			}
+
 			footer {
 				background-color: #1b5e20;
 				color: white;
@@ -176,27 +277,52 @@
 		</header>
 
 		<main>
-			<section class="hero">
+			<section class="hero section">
 				<h2>12 Canadians have shown their support</h2>
 				<p>Every bow you wear is a statement of solidarity and support for the people and environment of Greenland.</p>
 				<p>Together, we celebrate the beauty of green and promote sustainable practices that protect our Arctic home.</p>
 			</section>
 
-			<section id="about">
+			<section class="section" id="about">
 				<h2>About Green Bow</h2>
 				<p>Green Bow is more than just a fashion statement—it's a movement. Founded on the principles of environmental responsibility and cultural solidarity, we create beautiful green bows that celebrate Greenland's natural heritage and commitment to sustainability.</p>
 				<p>Each bow is carefully crafted from eco-friendly materials, reflecting our dedication to protecting the Arctic environment that Greenland and its people depend on.</p>
 			</section>
 
-
-			<section id="support">
-				<h2>How You Support Greenland</h2>
-				<p>When you wear a Green Bow, you're not just making a fashion statement—you're contributing to a larger mission:</p>
-				<ul style="margin-left: 2rem; margin-top: 1rem;">
-					<li><strong>10% of proceeds</strong> go directly to Greenlandic environmental organizations</li>
-					<li><strong>Sustainable sourcing</strong> supports local artisans and reduces Arctic pollution</li>
-					<li><strong>Community awareness</strong> helps educate people about Greenland's challenges and beauty</li>
-				</ul>
+			<section>
+				<div class="">
+					<div class="carousel">
+						<div class="carousel-wrapper" id="carouselWrapper">
+							<div class="carousel-slide">
+								<img src="images/IMG_1061.jpg" alt="Green Bow Collection 1">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/IMG_3448.jpg" alt="Green Bow Collection 2">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/IMG_3449.jpg" alt="Green Bow Collection 3">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/IMG_3451.jpg" alt="Green Bow Collection 4">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/IMG_3452.jpg" alt="Green Bow Collection 5">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/IMG_8751.JPEG" alt="Green Bow Collection 6">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/IMG_9127.jpg" alt="Green Bow Collection 7">
+							</div>
+							<div class="carousel-slide">
+								<img src="images/8910746104808009997.JPG" alt="Green Bow Collection 8">
+							</div>
+						</div>
+						<button class="carousel-button prev" id="prevBtn">❮</button>
+						<button class="carousel-button next" id="nextBtn">❯</button>
+					</div>
+					<div class="carousel-controls" id="carouselControls"></div>
+				</div>
 			</section>
 
 			<section id="contact">
@@ -209,5 +335,69 @@
 			<p>&copy; 2025 Green Bow. Supporting Greenland, one bow at a time.</p>
 			<p style="margin-top: 1rem; font-size: 0.9rem;">🌍 Celebrating Arctic heritage | 💚 Promoting sustainability | 🤝 Standing with Greenland</p>
 		</footer>
+
+		<script>
+			let currentSlide = 0;
+			const slides = document.querySelectorAll('.carousel-slide');
+			const totalSlides = slides.length;
+			const carouselWrapper = document.getElementById('carouselWrapper');
+			const carouselControls = document.getElementById('carouselControls');
+			const prevBtn = document.getElementById('prevBtn');
+			const nextBtn = document.getElementById('nextBtn');
+
+			// Create carousel dots
+			function createDots() {
+				for (let i = 0; i < totalSlides; i++) {
+					const dot = document.createElement('div');
+					dot.classList.add('carousel-dot');
+					if (i === 0) dot.classList.add('active');
+					dot.addEventListener('click', () => goToSlide(i));
+					carouselControls.appendChild(dot);
+				}
+			}
+
+			// Update carousel position
+			function updateCarousel() {
+				const translateValue = currentSlide * -100;
+				carouselWrapper.style.transform = `translateX(${translateValue}%)`;
+				
+				// Update dots
+				const dots = document.querySelectorAll('.carousel-dot');
+				dots.forEach((dot, index) => {
+					dot.classList.remove('active');
+					if (index === currentSlide) {
+						dot.classList.add('active');
+					}
+				});
+			}
+
+			// Go to specific slide
+			function goToSlide(n) {
+				currentSlide = (n + totalSlides) % totalSlides;
+				updateCarousel();
+			}
+
+			// Next slide
+			function nextSlide() {
+				currentSlide = (currentSlide + 1) % totalSlides;
+				updateCarousel();
+			}
+
+			// Previous slide
+			function prevSlide() {
+				currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+				updateCarousel();
+			}
+
+			// Event listeners
+			nextBtn.addEventListener('click', nextSlide);
+			prevBtn.addEventListener('click', prevSlide);
+
+			// Auto-advance carousel every 6 seconds
+			setInterval(nextSlide, 6000);
+
+			// Initialize
+			createDots();
+		</script>
 	</body>
 </html>
