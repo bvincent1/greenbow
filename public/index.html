@@ -33,6 +33,13 @@
 				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 			}
 
+			header .flag {
+				font-size: 4.5rem;
+				display: inline-block;
+				line-height: 1;
+				margin: 0 0.3em;
+			}
+
 			header .tagline {
 				font-size: 1.3rem;
 				font-style: italic;
@@ -252,6 +259,96 @@
 				right: 10px;
 			}
 
+			.form-container {
+				max-width: 500px;
+				margin: 2rem auto;
+			}
+
+			.form-group {
+				margin-bottom: 1.5rem;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.form-group label {
+				color: #1b5e20;
+				font-weight: 600;
+				margin-bottom: 0.5rem;
+				font-size: 1rem;
+			}
+
+			.form-group input,
+			.form-group select {
+				padding: 0.75rem;
+				border: 2px solid #c8e6c9;
+				border-radius: 6px;
+				font-size: 1rem;
+				transition: border-color 0.3s;
+				font-family: inherit;
+			}
+
+			.form-group input:focus,
+			.form-group select:focus {
+				outline: none;
+				border-color: #2e7d32;
+				box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+			}
+
+			.form-group input::placeholder {
+				color: #999;
+			}
+
+			.form-group input[type="file"] {
+				cursor: pointer;
+				padding: 0.5rem;
+			}
+
+			.form-group input[type="file"]::file-selector-button {
+				background-color: #2e7d32;
+				color: white;
+				padding: 0.5rem 1rem;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+				font-weight: 600;
+			}
+
+			.form-group input[type="file"]::file-selector-button:hover {
+				background-color: #1b5e20;
+			}
+
+			.form-group .optional-label {
+				font-size: 0.9rem;
+				color: #666;
+				margin-left: 0.5rem;
+			}
+
+			.submit-btn {
+				background-color: #2e7d32;
+				color: white;
+				padding: 0.85rem 2rem;
+				border: none;
+				border-radius: 6px;
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: background-color 0.3s;
+				align-self: center;
+			}
+
+			.submit-btn:hover {
+				background-color: #1b5e20;
+			}
+
+			.form-success {
+				color: #2e7d32;
+				font-weight: 600;
+				margin-top: 1rem;
+				text-align: center;
+				display: none;
+			}
+
 			footer {
 				background-color: #1b5e20;
 				color: white;
@@ -272,8 +369,8 @@
 	</head>
 	<body>
 		<header>
-			<h1>🇨🇦 Ribbons for Greenland 🇬🇱</h1>
-			<p class="tagline">Standing up for shared values of democracy and shared determination</p>
+			<h1><div class="flag">🇨🇦</div> Ribbons for Greenland <div class="flag">🇬🇱</div></h1>
+			<p class="tagline">Standing up for shared values of democracy and self-determination</p>
 		</header>
 
 		<main>
@@ -281,12 +378,6 @@
 				<h2>12 Canadians have shown their support</h2>
 				<p>Every bow you wear is a statement of solidarity and support for the people and environment of Greenland.</p>
 				<p>Together, we celebrate the beauty of green and promote sustainable practices that protect our Arctic home.</p>
-			</section>
-
-			<section class="section" id="about">
-				<h2>About Green Bow</h2>
-				<p>Green Bow is more than just a fashion statement—it's a movement. Founded on the principles of environmental responsibility and cultural solidarity, we create beautiful green bows that celebrate Greenland's natural heritage and commitment to sustainability.</p>
-				<p>Each bow is carefully crafted from eco-friendly materials, reflecting our dedication to protecting the Arctic environment that Greenland and its people depend on.</p>
 			</section>
 
 			<section>
@@ -325,9 +416,50 @@
 				</div>
 			</section>
 
+			<section id="support">
+				<h2>Show your support for greenland</h2>
+				<form id="supportForm" class="form-container">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" id="name" name="name" placeholder="Your full name" required>
+					</div>
+
+					<div class="form-group">
+						<label for="city">City</label>
+						<input type="text" id="city" name="city" placeholder="Your city" required>
+					</div>
+
+					<div class="form-group">
+						<label for="province">Province</label>
+						<select id="province" name="province" required>
+							<option value="">Select your province</option>
+							<option value="AB">Alberta</option>
+							<option value="BC">British Columbia</option>
+							<option value="MB">Manitoba</option>
+							<option value="NB">New Brunswick</option>
+							<option value="NL">Newfoundland and Labrador</option>
+							<option value="NS">Nova Scotia</option>
+							<option value="NT">Northwest Territories</option>
+							<option value="NU">Nunavut</option>
+							<option value="ON">Ontario</option>
+							<option value="PE">Prince Edward Island</option>
+							<option value="QC">Quebec</option>
+							<option value="SK">Saskatchewan</option>
+							<option value="YT">Yukon</option>
+						</select>
+					</div>
+				<div class="form-group">
+					<label for="image">Photo <span class="optional-label">(optional)</span></label>
+					<input type="file" id="image" name="image" accept="image/*">
+				</div>
+					<button type="submit" class="submit-btn">Join Us</button>
+					<div class="form-success" id="formSuccess">✓ Thank you for showing your support!</div>
+				</form>
+			</section>
+
 			<section id="contact">
-				<p>Interested in our green bows or want to learn more about our mission? We'd love to hear from you!</p>
-				<p>Email: <a href="mailto:hello@ribbonsforgreenland.ca" style="color: #2e7d32;">hello@ribbonsforgreenland.ca</a></p>
+				<h2>Join Our Community</h2>
+				<p>Interested in our Green Bow initiative, contact <a href="mailto:hello@ribbonsforgreenland.ca" style="color: #2e7d32;">hello@ribbonsforgreenland.ca</a></p>
 			</section>
 		</main>
 
@@ -398,6 +530,32 @@
 
 			// Initialize
 			createDots();
+
+			// Form handling
+			const supportForm = document.getElementById('supportForm');
+			const formSuccess = document.getElementById('formSuccess');
+
+			supportForm.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const name = document.getElementById('name').value;
+				const city = document.getElementById('city').value;
+				const province = document.getElementById('province').value;
+				const imageFile = document.getElementById('image').files[0];
+
+				// Log the data (in a real app, this would send to a server)
+				console.log('Form submitted:', { name, city, province, image: imageFile ? imageFile.name : 'No image' });
+
+				// Show success message
+				formSuccess.style.display = 'block';
+
+				// Reset form
+				supportForm.reset();
+
+				// Hide success message after 3 seconds
+				setTimeout(() => {
+					formSuccess.style.display = 'none';
+				}, 3000);
+			});
 		</script>
 	</body>
 </html>
